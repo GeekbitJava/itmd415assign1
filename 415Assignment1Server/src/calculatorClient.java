@@ -14,7 +14,7 @@ public class calculatorClient {
 	public static void main(String[] args){
 		
 
-		//Declarations
+		//Declarations of local variables
 	    Socket clientSock; 
 	    int port = 5556;
 	    String server = "localhost";
