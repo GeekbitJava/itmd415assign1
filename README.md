@@ -11,6 +11,11 @@ Using java.net.* package implement the following:
   
 2. a Client class that simulates clients and support the above functionality.
 
+Side note: 
+Try to get Eclipse and Git to sync up with each other to make commits easier.
+We had many issues with this. 
+We also created an organization called GeekbitJava for us to use for all the assignments and projects.
+
 # Authors 
 
 ## Deborah Barndt
