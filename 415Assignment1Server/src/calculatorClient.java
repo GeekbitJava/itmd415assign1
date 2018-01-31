@@ -65,7 +65,7 @@ public class calculatorClient
 	            // Do while loop keeps the prompt going until the user enters exit
 	            do
 	            {
-	            	System.out.println("Enter a simple equation: \n");
+	            	System.out.println("Enter a simple equation in the format: operand1 operator operand2 \n");
 	            	equation = keyScan.nextLine();
 		           
 	            	// Send the user's equation to the server
