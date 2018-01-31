@@ -34,8 +34,9 @@ public class calculatorClient
 	    String server = "localhost";
 	   
 	    // Try and catch block to open communication via the Socket sock1
-	    try {
-	    		//creates instance of clientSock at localhost port 5555
+	    try 
+	    {
+	    		// Creates instance of clientSock at localhost port 5555
 	           	clientSock = new Socket(server, port);
 	           
 	           	// BufferedReader will take an InputStreamReader which takes our sockets input stream
@@ -48,7 +49,7 @@ public class calculatorClient
 	           	// Scanner KeyScan will take the users input from the keyboard
 	           	Scanner keyScan = new Scanner(System.in);
 	           
-	           	// Some variables to hold user input and response from server
+	           	// Variables to hold user input and response from server
 	            String 	equation, 	// simple math problem given
 	            		result;		// answer to the equation
 	           
@@ -109,10 +110,10 @@ public class calculatorClient
             // Create a datagramPacket for sending the data
             DatagramPacket DataSend = new DatagramPacket(buf, buf.length, ip, 1234);
  
-            // invoke the send call to actually send the data.
+            // Invoke the send call to actually send the data.
             problem.send(DataSend);
  
-            // break the loop if user enters exit
+            // Break the loop if user enters exit
             if (input.equals("exit"))
                 break;
  

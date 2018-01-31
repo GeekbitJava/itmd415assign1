@@ -28,12 +28,12 @@ public class calculatorServer
 	    // Infinite loop for searching for connections
 	    while (true) 
 	    {
-	    	//clientSock to receive data
+	    	// ClientSock to receive data
 	    	Socket clientSock = null;
 	    	
 	    	try 
 	    	{     
-	    		//creates the connection to the client
+	    		// Creates the connection to the client
 	    		clientSock = serverSocket.accept();
 
 	    	    // PrintWriter takes our string and sends as a byte stream
@@ -73,15 +73,15 @@ public class calculatorServer
         {
         	buf = new byte[65535];
  
-            // create a DatgramPacket to receive the data.
+            // Create a DatgramPacket to receive the data
             DataReceive = new DatagramPacket(buf, buf.length);
  
-            // receive the data in byte buffer.
+            // Receive the data in byte buffer
             listen.receive(DataReceive);
  
             String input = new String(buf, 0, buf.length);
  
-            //To remove extra spaces.
+            // To remove extra spaces
             input=input.trim();
             System.out.println("Equation Received:- " + input);
  
@@ -120,10 +120,10 @@ public class calculatorServer
             System.out.println("Sending the result...");
             String res = Integer.toString(result);
  
-            // Clear the buffer after every message.
+            // Clear the buffer after every message
             buf = res.getBytes();
  
-            // get the port of client.
+            // Get the port of client
             int port = DataReceive.getPort();
  
             DataSend = new DatagramPacket(buf, buf.length, InetAddress.getLocalHost(), port);
