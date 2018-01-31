@@ -38,6 +38,7 @@ class ClientHandler extends Thread
     {
         String equation;
         String solution;
+        
         while (true) 
         {
             try 
