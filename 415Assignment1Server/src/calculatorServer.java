@@ -110,6 +110,9 @@ public class calculatorServer
  
             else if (operation.equals(" * "))
                 result = num1 * num2;
+            
+            else if (operation.equals(" % "))
+                result = num1 % num2;
  
             else
                 result = num1 / num2;
