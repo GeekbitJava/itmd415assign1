@@ -37,6 +37,8 @@ class ClientHandler extends Thread
 
                 //Logs the new thread in the console
                 System.out.println("Client " + this.s + " established");
+                
+
                  
                 // receive the equation from the client
                 equation = clientReader.readLine();

@@ -44,15 +44,17 @@ public class calculatorClient {
 	           //this shows a proper connection is made with the server
 	          String response = clientReader.readLine();
 	          System.out.println(response);
-	           
+	          
+
+ 	           //prompt the user and receive input
+	          System.out.println("Welcome to the 415 Calculator.");
+	          System.out.println("You may enter \"count\" to show the number of connections,");
+	          System.out.println("or \"exit\" to disconnect.");
 
 	           
 	           //do while loop keeps the prompt going until the user enters exit
 	           do{
-		           //prompt the user and receive input
-	        	   System.out.println("Welcome to the 415 Calculator.");
-	        	   System.out.println("You may enter \"count\" to show the number of connections,");
-	        	   System.out.println("or \"exit\" to disconnect.");
+
 		           System.out.println("Enter simple equation: \n");
 		           equation = keyScan.nextLine();
 		           
