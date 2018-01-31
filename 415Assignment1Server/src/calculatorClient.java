@@ -13,8 +13,8 @@ public class calculatorClient {
 	
 	public static void main(String[] args){
 		
-
-		//Declarations of local variables
+		// Testing my commits
+		// Declarations of local variables
 	    Socket clientSock; 
 	    int port = 5556;
 	    String server = "localhost";
