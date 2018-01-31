@@ -49,7 +49,8 @@ public class calculatorClient
 	           	Scanner keyScan = new Scanner(System.in);
 	           
 	           	// Some variables to hold user input and response from server
-	            String equation, result;
+	            String 	equation, 	// simple math problem given
+	            		result;		// answer to the equation
 	           
 	            // This will display a proper connection is made with the server
 	            String response = clientReader.readLine();
@@ -77,7 +78,7 @@ public class calculatorClient
 	            	}           
 	            }
 	           
-	           // If exit is entered it will exit this loop
+	           // If exit is entered by user it will exit this loop
 	           while(!equation.equals("exit"));         
 	    }
 	    

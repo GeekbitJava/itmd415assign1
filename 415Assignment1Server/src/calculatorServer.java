@@ -94,7 +94,7 @@ public class calculatorServer
  
             int result;
  
-            // Use StringTokenizer to break the equation into operand and operation
+            // Use StringTokenizer to break the equation into number and operation
             StringTokenizer st = new StringTokenizer(input);
  
             int num1 = Integer.parseInt(st.nextToken());
