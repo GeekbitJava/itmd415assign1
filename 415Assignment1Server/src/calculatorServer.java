@@ -10,14 +10,13 @@
 
 import java.io.*;
 import java.net.*;
-public class calculatorServer {
-	
-	
+import java.util.Scanner;
+public class calculatorServer 
+{
     static String okMsg = "515OK - From CalculatorServer";
 
-
-    public static void main(String[] args) throws IOException {
-
+    public static void main(String[] args) throws IOException 
+    {
     	// Just faster to put here, for changes
     	int portNumber = 5556;
 
@@ -28,7 +27,6 @@ public class calculatorServer {
 	    // Infinite loop for searching for connections
 	    while (true) 
 	    {
-	    	
 	    	//clientSock to receive data
 	    	Socket clientSock = null;
 	    	
@@ -37,7 +35,6 @@ public class calculatorServer {
 	    		//creates the connection to the client
 	    		clientSock = serverSocket.accept();
 
-	    	    
 	    	    // PrintWriter takes our string and sends as a byte stream
 	    	    PrintWriter clientWriter =
 	    	        new PrintWriter(clientSock.getOutputStream(), true);
@@ -46,7 +43,6 @@ public class calculatorServer {
 		        BufferedReader clientReader = new BufferedReader (
 		        	new InputStreamReader(clientSock.getInputStream()));  
 
-	    	    
                 // Create a new thread
                 Thread clientThread = new ClientHandler(clientSock, clientReader, clientWriter);
  

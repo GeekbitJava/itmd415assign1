@@ -18,7 +18,8 @@ import java.util.Scanner;
 
 import javax.xml.ws.Response;
 
-public class calculatorClient {
+public class calculatorClient 
+{
 	
 	public static void main(String[] args)
 	{
@@ -34,14 +35,11 @@ public class calculatorClient {
 	           
 	           	// BufferedReader will take an InputStreamReader which takes our sockets input stream
 	           	// This will be how we will take data in from the socket
-	           	BufferedReader clientReader = new BufferedReader (
-	        		   new InputStreamReader(clientSock.getInputStream()));
+	           	BufferedReader clientReader = new BufferedReader ( new InputStreamReader(clientSock.getInputStream()));
 
 	           	// PrintWriter takes the data from client and sends to server as byte stream
-	           	PrintWriter clientWriter =
-	        	        new PrintWriter(clientSock.getOutputStream(), true);
-	           
-	           
+	           	PrintWriter clientWriter = new PrintWriter(clientSock.getOutputStream(), true);
+	       
 	           	// Scanner KeyScan will take the users input from the keyboard
 	           	Scanner keyScan = new Scanner(System.in);
 	           
@@ -51,30 +49,28 @@ public class calculatorClient {
 	            // This will display a proper connection is made with the server
 	            String response = clientReader.readLine();
 	            System.out.println(response);
-	          
 
  	           	// Prompt the user to enter input and receive result
 	            System.out.println("Welcome to the 415/515 Calculator.");
 	            System.out.println("You may enter \"count\" to show the number of connections,");
 	            System.out.println("or \"exit\" to disconnect.");
-
 	           
 	            // Do while loop keeps the prompt going until the user enters exit
-	           do
-	           {
-		           System.out.println("Enter a simple equation: \n");
-		           equation = keyScan.nextLine();
+	            do
+	            {
+	            	System.out.println("Enter a simple equation: \n");
+	            	equation = keyScan.nextLine();
 		           
-		           // Send the user's equation to the server
-		           clientWriter.println(equation);
+	            	// Send the user's equation to the server
+	            	clientWriter.println(equation);
 		           
-		           // If the input is not exit, then it will show what was received from the server
-		           if(!equation.equals("exit"))
-		           {
-		        	   result = clientReader.readLine();
-		        	   System.out.println(result);
-		           }           
-	           }
+	            	// If the input is not exit, then it will show what was received from the server
+	            	if(!equation.equals("exit"))
+	            	{
+	            		result = clientReader.readLine();
+	            		System.out.println(result);
+	            	}           
+	            }
 	           
 	           // If exit is entered it will exit this loop
 	           while(!equation.equals("exit"));         
@@ -84,7 +80,6 @@ public class calculatorClient {
 	    {
 	        System.out.println("Client side error: " + e.getMessage());
 	    }
-
 
 	}
 }
