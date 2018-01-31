@@ -11,6 +11,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 public class calculatorServer 
 {
     static String okMsg = "515OK - From CalculatorServer";
@@ -23,7 +24,7 @@ public class calculatorServer
 		// Creates the server socket, and logs that it was started
 	    ServerSocket serverSocket = new ServerSocket(portNumber);	
 	    System.out.println("The Server Socket is set \n");
-
+	    
 	    // Infinite loop for searching for connections
 	    while (true) 
 	    {
@@ -57,6 +58,73 @@ public class calculatorServer
 	    	        
 	    	}
 
+        }
+	    
+	    // Create a socket to listen at port 1234
+        DatagramSocket listen = new DatagramSocket(1234);
+        
+        byte[] buf = null;
+        
+        DatagramPacket DataReceive = null;
+        
+        DatagramPacket DataSend = null;
+        
+        while (true)
+        {
+        	buf = new byte[65535];
+ 
+            // create a DatgramPacket to receive the data.
+            DataReceive = new DatagramPacket(buf, buf.length);
+ 
+            // receive the data in byte buffer.
+            listen.receive(DataReceive);
+ 
+            String input = new String(buf, 0, buf.length);
+ 
+            //To remove extra spaces.
+            input=input.trim();
+            System.out.println("Equation Received:- " + input);
+ 
+            // Exit the server if the client sends exit
+            if (input.equals("exit"))
+            {
+                System.out.println("Client sent exit.....EXITING PROGRAM....GOODBYE");
+                break;
+            }
+ 
+            int result;
+ 
+            // Use StringTokenizer to break the equation into operand and operation
+            StringTokenizer st = new StringTokenizer(input);
+ 
+            int num1 = Integer.parseInt(st.nextToken());
+            String operation = st.nextToken();
+            int num2 = Integer.parseInt(st.nextToken());
+ 
+            // Perform the required operation given by user
+            if (operation.equals(" + "))
+                result = num1 + num2;
+ 
+            else if (operation.equals(" - "))
+                result = num1 - num2;
+ 
+            else if (operation.equals(" * "))
+                result = num1 * num2;
+ 
+            else
+                result = num1 / num2;
+ 
+            System.out.println("Sending the result...");
+            String res = Integer.toString(result);
+ 
+            // Clear the buffer after every message.
+            buf = res.getBytes();
+ 
+            // get the port of client.
+            int port = DataReceive.getPort();
+ 
+            DataSend = new DatagramPacket(buf, buf.length, InetAddress.getLocalHost(), port);
+            listen.send(DataSend);
         }
     }
 }
