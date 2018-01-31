@@ -1,3 +1,13 @@
+/**
+ * Deborah Barndt
+ * Thomas Boller
+ * 1-30-18
+ * ClientHandler.java
+ * Assignment 1
+ * This program will 
+ * Written by Deborah Barndt & Thomas Boller. */
+
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -10,13 +20,10 @@ import java.net.Socket;
 // ClientHandler class
 class ClientHandler extends Thread 
 {
-
     final BufferedReader clientReader;
     final PrintWriter clientWriter;
     final Socket s;
-
     
- 
     // Constructor
     public ClientHandler(Socket s, BufferedReader clientReader, PrintWriter clientWriter) 
     {
@@ -32,40 +39,40 @@ class ClientHandler extends Thread
         String solution;
         while (true) 
         {
-            try {
- 
-
-                //Logs the new thread in the console
+            try 
+            {
+                // Logs the new thread in the console
                 System.out.println("Client " + this.s + " established");
-                
-
-                 
-                // receive the equation from the client
+                           
+                // Receive the equation from the client
                 equation = clientReader.readLine();
                  
-                //if statement determines if the user entered exit, count, or an equation
+                // If statement determines if the user entered exit, count, or an equation
                 if(equation.equals("exit"))
                 { 
-                	//says goodbye
+                	// Server says goodbye
                 	clientWriter.println("Goodybye");
                 	
-                	//makes log of connection lost
+                	// Makes log of connection lost
                     System.out.println("Client " + this.s + " sent exit signal.");
                     this.s.close();
                     System.out.println("Connection closed");
                     
                     break;
-                }else{
-                	
-                	//echoes back the sent information
+                }
+                
+                else
+                {
+                	// Echoes back the sent information
                 	clientWriter.println(equation + "Received");
                 	int num = Thread.activeCount();
                 	clientWriter.println(num);
                 }
-                 
-
                 
-            } catch (IOException e) {
+            } 
+            
+            catch (IOException e) 
+            {
                 e.printStackTrace();
             }
         }
@@ -76,7 +83,10 @@ class ClientHandler extends Thread
             this.clientReader.close();
             this.clientWriter.close();
              
-        }catch(IOException e){
+        }
+        
+        catch(IOException e)
+        {
             e.printStackTrace();
         }
     }
