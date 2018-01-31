@@ -4,7 +4,8 @@
  * 1-30-18
  * calculatorServer.java
  * Assignment 1
- * This program will 
+ * This program will allow the client to send a message to the server. Once the message
+ * is received, the server will respond with a message.
  * Written by Deborah Barndt & Thomas Boller. */
 
 import java.io.*;

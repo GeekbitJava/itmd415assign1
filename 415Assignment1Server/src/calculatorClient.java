@@ -4,7 +4,7 @@
  * 1-30-18
  * calculatorClient.java
  * Assignment 1
- * This program will 
+ * This program will send messages to the server.
  * Written by Deborah Barndt & Thomas Boller. */
 
 import java.io.BufferedReader;
@@ -54,7 +54,7 @@ public class calculatorClient {
 	          
 
  	           	// Prompt the user to enter input and receive result
-	            System.out.println("Welcome to the 415 Calculator.");
+	            System.out.println("Welcome to the 415/515 Calculator.");
 	            System.out.println("You may enter \"count\" to show the number of connections,");
 	            System.out.println("or \"exit\" to disconnect.");
 
@@ -62,7 +62,7 @@ public class calculatorClient {
 	            // Do while loop keeps the prompt going until the user enters exit
 	           do
 	           {
-		           System.out.println("Enter simple equation: \n");
+		           System.out.println("Enter a simple equation: \n");
 		           equation = keyScan.nextLine();
 		           
 		           // Send the user's equation to the server
@@ -77,8 +77,7 @@ public class calculatorClient {
 	           }
 	           
 	           // If exit is entered it will exit this loop
-	           while(!equation.equals("exit"));
-	           
+	           while(!equation.equals("exit"));         
 	    }
 	    
 	    catch (IOException e) 

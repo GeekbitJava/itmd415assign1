@@ -4,7 +4,8 @@
  * 1-30-18
  * ClientHandler.java
  * Assignment 1
- * This program will 
+ * This program will allow the user to enter in a simple math equation to the server 
+ * for a result.
  * Written by Deborah Barndt & Thomas Boller. */
 
 
@@ -51,7 +52,7 @@ class ClientHandler extends Thread
                 if(equation.equals("exit"))
                 { 
                 	// Server says goodbye
-                	clientWriter.println("Goodybye");
+                	clientWriter.println("Goodbye");
                 	
                 	// Makes log of connection lost
                     System.out.println("Client " + this.s + " sent exit signal.");
@@ -67,6 +68,17 @@ class ClientHandler extends Thread
                 	clientWriter.println(equation + "Received");
                 	int num = Thread.activeCount();
                 	clientWriter.println(num);
+                	
+                	Thread th[] = new Thread[num];
+                	
+                	// Returns the number of threads that are put into the array
+                	Thread.enumerate(th);
+                	
+                	// Prints the active threads when count is inputed 
+                	for (int i = 0; i < num; i++)
+                	{
+                		clientWriter.println(i + ": " + th[i]);
+                	}
                 }
                 
             } 
@@ -79,7 +91,7 @@ class ClientHandler extends Thread
          
         try
         {
-            // closing resources
+            // Closing resources
             this.clientReader.close();
             this.clientWriter.close();
              
