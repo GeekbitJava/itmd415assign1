@@ -29,8 +29,8 @@ class ClientHandler extends Thread
         this.clientWriter = clientWriter;
     }
  
-    @Override
-    public void run() 
+    //@Override
+    public void run(Thread[] clientThread) 
     {
         String equation;
         String solution = "You did not enter the equation in the format: \n operand1 operator operand2";
@@ -61,21 +61,24 @@ class ClientHandler extends Thread
                 
                 else if (equation.equals("count"))
                 {            	
-                	/*// Echoes back the sent information
+                	// Echoes back the sent information
                 	clientWriter.println(equation + "Received");
-                	int num = Thread.activeCount();
+                	
+                	/*int num = Thread.activeCount();
                 	clientWriter.println(num);
                 	
-                	Thread th[] = new Thread[num];
+                	//Thread th[] = new Thread[num];
                 	
                 	// Returns the number of threads that are put into the array
-                	Thread.enumerate(th);
+                	//Thread.enumerate(th);
+                	Thread.enumerate(clientThread);
                 	
                 	// Prints the active threads when count is inputed 
                 	for (int i = 0; i < num; i++)
                 	{
-                		clientWriter.println(i + ": " + th[i]);
-                	}  */            	
+                		//clientWriter.println(i + ": " + th[i]);
+                		clientWriter.println(i + ": " + clientThread[i]);
+                	}  */           	
                 }
                 
                 else
