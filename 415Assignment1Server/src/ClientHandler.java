@@ -71,11 +71,11 @@ class ClientHandler extends Thread
                 if (equation.equals("exit"))
                 	if (equation.equals("Exit"))
                 		if (equation.equals("EXIT"))
-                { 
-                	//Sets the loop to end and breaks to the end
-                    active = false;
-                   // break;             
-                }
+                		{ 
+                			//Sets the loop to end and breaks to the end
+                			active = false;
+                			// break;             
+                		}
                 
                 else if (equation.equals("count"))
                 {            	
