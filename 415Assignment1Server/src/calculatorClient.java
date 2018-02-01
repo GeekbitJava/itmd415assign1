@@ -23,6 +23,7 @@ public class calculatorClient
 	    Socket clientSock; 
 	    int port = 5556;
 	    String server = "localhost";
+	    String pingmsg = "Are you there?";
 	   
 	    // Try and catch block to open communication via the Socket sock1
 	    try 
@@ -45,6 +46,7 @@ public class calculatorClient
 	            		result;		// answer to the equation
 	           
 	            // This will display a proper connection is made with the server
+	            clientWriter.println(pingmsg);
 	            String response = clientReader.readLine();
 	            System.out.println(response);
 

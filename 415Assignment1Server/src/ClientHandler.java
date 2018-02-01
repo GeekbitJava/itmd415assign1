@@ -20,6 +20,7 @@ class ClientHandler extends Thread
     final BufferedReader clientReader;
     final PrintWriter clientWriter;
     final Socket s;
+    static String okMsg = "515OK - From CalculatorServer";
     
     // Constructor
     public ClientHandler(Socket s, BufferedReader clientReader, PrintWriter clientWriter) 
@@ -38,6 +39,21 @@ class ClientHandler extends Thread
         int intresult;
         double doubresult;
         boolean active = true;
+        String pingmsg = null;
+        
+        try
+        {
+            // Receive the equation from the client
+            pingmsg = clientReader.readLine();
+            
+            if (pingmsg.equals("Are you there?")) {
+            	clientWriter.println(okMsg);
+            }
+        	
+        }
+        catch (IOException e){
+        	
+        }
         
         // Logs the new thread in the console
         System.out.println("Client " + this.s + " established");
