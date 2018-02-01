@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
 // ClientHandler class
 class ClientHandler extends Thread 
 {
-    final BufferedReader clientReader;
+    private final BufferedReader clientReader;
     final PrintWriter clientWriter;
     final Socket s;
     static String okMsg = "515OK - From CalculatorServer";
@@ -35,8 +35,6 @@ class ClientHandler extends Thread
     {
         String equation;
         String solution = "You did not enter the equation in the format: \n operand1 operator operand2";
-        int intresult;
-        double doubresult;
         boolean active = true;
         String pingmsg = null;
         
@@ -72,11 +70,9 @@ class ClientHandler extends Thread
                 	//Sets the loop to end and breaks to the end
                     active = false;
                     break;   
-                }
-                
+                }     
                 else if (equation.equalsIgnoreCase("count"))
                 {            	
-
                 	//pulls the number of active threads
                 	int num = Thread.activeCount();
                 	
@@ -84,65 +80,38 @@ class ClientHandler extends Thread
                 	num = num - 1;
                 	
                 	//Prints out the message to the user and clears the buffer
-                	clientWriter.println("The current number of connected clients: " + num);                	       	
+                	clientWriter.println("The current number of connected clients: " + num); 
                 }
-                
-                else
+                //regex checks from start any number of digits followed by a whitespace, followed by one of the math symbols, followed
+                //by a whitespace followed by any number of digits not followed by anything else
+                else if (equation.matches("\\A(\\d*)\\s([+,-,*,/,%])\\s(\\d*)\\Z"))
                 {         	
-                	// Use StringTokenizer to break the equation into operand and operation
-                    StringTokenizer st = new StringTokenizer(equation, " ");
-         
-                    // Parse string for operand1 operator and operand2
-                    String num1 = st.nextToken();
-                    String operation = st.nextToken();
-                    String num2 = st.nextToken();
-                    
-                    // Set the operands to double and int to allow for int division
-                    int integ2 = Integer.parseInt(num2);
-                    int integ1 = Integer.parseInt(num1);
-                    double doub1 = Double.parseDouble(num1);
-                    double doub2 = Double.parseDouble(num2);
-
-                    // Perform the required operation given by user
-                    switch (operation) 
-                    {
-                    	case "+":
-                    		doubresult = doub1 + doub2;
-                    		solution = Double.toString(doubresult);                    	
-                    		break;
-                    	
-                    	case "-":
-                    		doubresult = doub1 - doub2;
-                    		solution = Double.toString(doubresult);
-                    		break;
-                    	
-                    	case "/":
-                    		doubresult = doub1 / doub2;
-                    		solution = Double.toString(doubresult);
-                    		break;
-                    	
-                    	case "//":
-                    		intresult = integ1 / integ2;
-                    		solution = Integer.toString(intresult);
-                    		break;
-                    	
-                    	case "%":
-                    		doubresult = doub1 % doub2;
-                    		solution = Double.toString(doubresult);
-                    		break;
-                    	
-                    	case "*":
-                    		doubresult = doub1 * doub2;
-                    		solution = Double.toString(doubresult);
-                    		break;
-                    	
-                    	default: System.out.println("ERROR!");
-                    	break;
-                    }
-         
+                	solution = calcDouble(equation);
                     System.out.println("Sending the result...");
                     clientWriter.println(solution);
                     clientWriter.flush();
+                }
+                //regex checks for #.# Symbol #.#, ## Symbol #.#, and #.# Symbol ##
+                else if (equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
+                		equation.matches("\\A(\\d*)\\s([+,-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
+                		equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,-,*,/,%])\\s(\\d*)\\Z"))
+                {         	
+                	solution = calcDouble(equation);
+                    System.out.println("Sending the result...");
+                    clientWriter.println(solution);
+                    clientWriter.flush();
+                }
+                //regex does the same as previous, however this one checks for the interger division double slash
+                else if (equation.matches("\\A(\\d*)\\s(//)\\s(\\d*)\\Z")) {
+                	solution = intdiv (equation);
+                    System.out.println("Sending the result...");
+                    clientWriter.println(solution);
+                    clientWriter.flush();
+                }
+                else
+                {
+                	//Warns the user that they did not enter a valid string
+                	clientWriter.println("ERROR: You did not make a valid entry!");
                 }
                 
             } 
@@ -172,5 +141,83 @@ class ClientHandler extends Thread
         {
             e.printStackTrace();
         }
+    }
+    
+    public String intdiv (String eq) {
+    	
+    	//initialize local variables
+    	String answer = null;
+        int intresult = 0;
+    	
+    	// Use StringTokenizer to break the equation into operand and operation
+        StringTokenizer st = new StringTokenizer(eq, " ");
+        
+        // Parse string for operand1 operator and operand2
+        String num1 = st.nextToken();
+        String operation = st.nextToken();
+        String num2 = st.nextToken();
+        
+        // Set the operands to double and int to allow for int division
+        int integ2 = Integer.parseInt(num2);
+        int integ1 = Integer.parseInt(num1);
+
+        //performs integer division on the given items
+		intresult = integ1 / integ2;
+		answer = Integer.toString(intresult);
+    	
+    	return answer;
+    }
+    
+    public String calcDouble (String eq) {
+    	
+    	//initialize local variables
+    	String answer = null;
+        double doubresult;
+    	
+    	// Use StringTokenizer to break the equation into operand and operation
+        StringTokenizer st = new StringTokenizer(eq, " ");
+
+        // Parse string for operand1 operator and operand2
+        String num1 = st.nextToken();
+        String operation = st.nextToken();
+        String num2 = st.nextToken();
+        
+        // Set the operands to double
+        double doub1 = Double.parseDouble(num1);
+        double doub2 = Double.parseDouble(num2);
+
+        // Perform the required operation given by user
+        switch (operation) 
+        {
+        	case "+":
+        		doubresult = doub1 + doub2;
+        		answer = Double.toString(doubresult);                    	
+        		break;
+        	
+        	case "-":
+        		doubresult = doub1 - doub2;
+        		answer = Double.toString(doubresult);
+        		break;
+        	
+        	case "/":
+        		doubresult = doub1 / doub2;
+        		answer = Double.toString(doubresult);
+        		break;
+        	
+        	case "%":
+        		doubresult = doub1 % doub2;
+        		answer = Double.toString(doubresult);
+        		break;
+        	
+        	case "*":
+        		doubresult = doub1 * doub2;
+        		answer = Double.toString(doubresult);
+        		break;
+        	
+        	default: System.out.println("ERROR!");
+        	break;
+        }
+    	
+    	return answer;
     }
 }
