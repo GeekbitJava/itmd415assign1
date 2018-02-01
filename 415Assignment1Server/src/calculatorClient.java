@@ -18,14 +18,20 @@ import javax.swing.JOptionPane;
 
 public class calculatorClient 
 {
-	
+	// Declarations of class variables
+    private static Socket clientSock; 
+    private static int port = 5556;
+    private static String server = "localhost";
+    private static String pingmsg = "Are you there?";
+    private static BufferedReader clientReader;
+    private static PrintWriter clientWriter;
+    private static Scanner keyScan = null;
+    private static String response = null;
+    private static String equation = null;
+    private static String result = null;
+ 
 	public static void main(String[] args) throws IOException
 	{
-		// Declarations of local variables
-	    Socket clientSock; 
-	    int port = 5556;
-	    String server = "localhost";
-	    String pingmsg = "Are you there?";
 	   
 	    // Try and catch block to open communication via the Socket sock1
 	    try 
@@ -35,21 +41,17 @@ public class calculatorClient
 	           
 	           	// BufferedReader will take an InputStreamReader which takes our sockets input stream
 	           	// This will be how we will take data in from the socket
-	           	BufferedReader clientReader = new BufferedReader ( new InputStreamReader(clientSock.getInputStream()));
+	           	clientReader = new BufferedReader ( new InputStreamReader(clientSock.getInputStream()));
 
 	           	// PrintWriter takes the data from client and sends to server as byte stream
-	           	PrintWriter clientWriter = new PrintWriter(clientSock.getOutputStream(), true);
+	           	clientWriter = new PrintWriter(clientSock.getOutputStream(), true);
 	       
 	           	// Scanner KeyScan will take the users input from the keyboard
-	           	Scanner keyScan = new Scanner(System.in);
-	           
-	           	// Variables to hold user input and response from server
-	            String 	equation, 	// simple math problem given
-	            		result;		// answer to the equation
+	           	keyScan = new Scanner(System.in);
 	           
 	            // This will display a proper connection is made with the server
 	            clientWriter.println(pingmsg);
-	            String response = clientReader.readLine();
+	            response = clientReader.readLine();
 	            System.out.println(response);
 
  	           	// Prompt the user to enter input and receive result
@@ -70,59 +72,21 @@ public class calculatorClient
 	            	clientWriter.println(equation);
 		           
 	            	// If the input is not exit, then it will show what was received from the server
-	            	if(!equation.equals("exit"))
+	            	if(!equation.equalsIgnoreCase("exit"))
 	            	{
 	            		result = clientReader.readLine();
 	            		System.out.println(result);
 	            		//JOptionPane.showMessageDialog(null, "The answer is: " + result, "Result of Equation", JOptionPane.INFORMATION_MESSAGE);
+	            		keyScan.close();
 	            	}        
-	            }
-	           
+	            }	           
 	           // If exit is entered by user it will exit this loop
-	           while(!equation.equals("exit"));         
-	    }
-	    
+	           while(!equation.equalsIgnoreCase("exit"));         
+	    }	    
 	    catch (IOException e) 
 	    {
 	        System.out.println("Client side error: " + e.getMessage());
+	        keyScan.close();
 	    }
-	    
-	    /*
-	    // Creates a scanner object
-	    Scanner compute = new Scanner(System.in);
-	    
-	    // Create the socket object for carrying the data
-        DatagramSocket problem = new DatagramSocket();
-        
-        InetAddress ip = InetAddress.getLocalHost();
-        byte buf[] = null;
-        
-        // Loop until the user enters exit
-        while (true)
-        {
-            System.out.print("Enter the equation in the format: operand1 operator operand2\n");
-            String input = compute.nextLine();
-            buf = new byte[13579];
- 
-            // Convert the string input into a byte array
-            buf = input.getBytes();
- 
-            // Create a datagramPacket for sending the data
-            DatagramPacket DataSend = new DatagramPacket(buf, buf.length, ip, 1234);
- 
-            // Invoke the send call to actually send the data.
-            problem.send(DataSend);
- 
-            // Break the loop if user enters exit
-            if (input.equals("exit"))
-                break;
- 
-            buf = new byte[13579];
-            DatagramPacket DataReceive = new DatagramPacket(buf, buf.length);
-            problem.receive(DataReceive);
- 
-            System.out.println("Answer = " + new String(buf,0,buf.length));
-        }
-*/
 	}
 }
