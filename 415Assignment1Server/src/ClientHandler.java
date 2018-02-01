@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.StringTokenizer;
 
+import org.omg.CORBA.IntHolder;
+
 
 // ClientHandler class
 class ClientHandler extends Thread 
@@ -154,8 +156,7 @@ class ClientHandler extends Thread
         }//end of the while block
          
         try
-        {
-        	
+        {        	
         	// Server says goodbye
         	clientWriter.println("Goodbye");
         	clientWriter.flush();
@@ -166,7 +167,6 @@ class ClientHandler extends Thread
             this.clientReader.close();
             this.clientWriter.close();
             this.s.close();
-
         }
         
         catch(IOException e)
