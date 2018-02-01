@@ -38,8 +38,9 @@ class ClientHandler extends Thread
         int intresult;
         double doubresult;
         boolean active = true;
-        boolean discon = true;
         
+        // Logs the new thread in the console
+        System.out.println("Client " + this.s + " established");
         
         //While loop continually checks for input and responds.
         while (active) 
@@ -47,8 +48,6 @@ class ClientHandler extends Thread
         	
             try 
             {
-                // Logs the new thread in the console
-                System.out.println("Client " + this.s + " established");
                            
                 // Receive the equation from the client
                 equation = clientReader.readLine();
