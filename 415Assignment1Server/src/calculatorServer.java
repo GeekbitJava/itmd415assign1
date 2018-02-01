@@ -50,20 +50,11 @@ public class calculatorServer
  
                 // Invoking the start() method
                 clientThread.start();
-
-             //   if (clientReader.equals("Are you there?")) {
-                	
-            //    	clientWriter.println(okMsg); 
-            //    	clientWriter.flush();
-           //     }
-                	    
-
 	    	}
 	    	    
 	    	catch (IOException e) 
 	    	{
-	    	    System.out.println("Server Error: " + e.getMessage());
-	    	        
+	    	    System.out.println("Server Error: " + e.getMessage());       
 	    	}
 	    }
 	    

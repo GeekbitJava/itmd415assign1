@@ -56,7 +56,7 @@ class ClientHandler extends Thread
         // Logs the new thread in the console
         System.out.println("Client " + this.s + " established");
         
-        //While loop continually checks for input and responds.
+        // While loop continually checks for input and responds.
         while (active) 
         {
             try 
@@ -67,23 +67,23 @@ class ClientHandler extends Thread
                 // If statement determines if the user entered exit, count, or an equation
                 if (equation.equalsIgnoreCase("exit"))
                 { 
-                	//Sets the loop to end and breaks to the end
+                	// Sets the loop to end and breaks to the end
                     active = false;
                     break;   
                 }     
                 else if (equation.equalsIgnoreCase("count"))
                 {            	
-                	//pulls the number of active threads
+                	// Pulls the number of active threads
                 	int num = Thread.activeCount();
                 	
-                	//removes the count of the original server
+                	// Removes the count of the original server
                 	num = num - 1;
                 	
-                	//Prints out the message to the user and clears the buffer
+                	// Prints out the message to the user and clears the buffer
                 	clientWriter.println("The current number of connected clients: " + num); 
                 }
-                //regex checks from start any number of digits followed by a whitespace, followed by one of the math symbols, followed
-                //by a whitespace followed by any number of digits not followed by anything else
+                // Regex checks from start any number of digits followed by a whitespace, followed by one of the math symbols, followed
+                // by a whitespace followed by any number of digits not followed by anything else
                 else if (equation.matches("\\A(\\d*)\\s([+,-,*,/,%])\\s(\\d*)\\Z"))
                 {         	
                 	solution = calcDouble(equation);
@@ -91,7 +91,7 @@ class ClientHandler extends Thread
                     clientWriter.println(solution);
                     clientWriter.flush();
                 }
-                //regex checks for #.# Symbol #.#, ## Symbol #.#, and #.# Symbol ##
+                // Regex checks for #.# Symbol #.#, ## Symbol #.#, and #.# Symbol ##
                 else if (equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
                 		equation.matches("\\A(\\d*)\\s([+,-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
                 		equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,-,*,/,%])\\s(\\d*)\\Z"))
@@ -101,7 +101,7 @@ class ClientHandler extends Thread
                     clientWriter.println(solution);
                     clientWriter.flush();
                 }
-                //regex does the same as previous, however this one checks for the interger division double slash
+                // Regex does the same as previous, however this one checks for the integer division double slash
                 else if (equation.matches("\\A(\\d*)\\s(//)\\s(\\d*)\\Z")) {
                 	solution = intdiv (equation);
                     System.out.println("Sending the result...");
@@ -110,7 +110,7 @@ class ClientHandler extends Thread
                 }
                 else
                 {
-                	//Warns the user that they did not enter a valid string
+                	// Warns the user that they did not enter a valid string
                 	clientWriter.println("ERROR: You did not make a valid entry!");
                 }
                 
@@ -121,7 +121,7 @@ class ClientHandler extends Thread
                 e.printStackTrace();
             }
             
-        }//end of the while block
+        } //End of the while block
          
         try
         {        	
@@ -143,9 +143,9 @@ class ClientHandler extends Thread
         }
     }
     
-    public String intdiv (String eq) {
-    	
-    	//initialize local variables
+    public String intdiv (String eq) 
+    {
+    	// Initialize local variables
     	String answer = null;
         int intresult = 0;
     	
@@ -161,16 +161,16 @@ class ClientHandler extends Thread
         int integ2 = Integer.parseInt(num2);
         int integ1 = Integer.parseInt(num1);
 
-        //performs integer division on the given items
+        // Performs integer division on the given items
 		intresult = integ1 / integ2;
 		answer = Integer.toString(intresult);
     	
     	return answer;
     }
     
-    public String calcDouble (String eq) {
-    	
-    	//initialize local variables
+    public String calcDouble (String eq) 
+    {
+    	// Initialize local variables
     	String answer = null;
         double doubresult;
     	
