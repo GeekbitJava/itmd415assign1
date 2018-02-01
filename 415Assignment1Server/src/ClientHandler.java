@@ -87,8 +87,9 @@ class ClientHandler extends Thread
                 	//resets the variable to 0
                 	threadCount = 0;
                 }
-                //regex checks from start any number of digits followed by a whitespace, followed by one of the math symbols, followed
-                //by a whitespace followed by any number of digits not followed by anything else
+                
+                // Regex checks from start any number of digits followed by a whitespace, followed by one of the math symbols, followed
+                // by a whitespace followed by any number of digits not followed by anything else
                 else if (equation.matches("\\A(\\d*)\\s([+,-,*,/,%])\\s(\\d*)\\Z"))
                 {         	
                 	solution = calcDouble(equation);
@@ -96,7 +97,7 @@ class ClientHandler extends Thread
                     clientWriter.println(solution);
                     clientWriter.flush();
                 }
-                //regex checks for #.# Symbol #.#, ## Symbol #.#, and #.# Symbol ##
+                // Regex checks for #.# Symbol #.#, ## Symbol #.#, and #.# Symbol ##
                 else if (equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
                 		equation.matches("\\A(\\d*)\\s([+,-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
                 		equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,-,*,/,%])\\s(\\d*)\\Z"))
@@ -106,7 +107,8 @@ class ClientHandler extends Thread
                     clientWriter.println(solution);
                     clientWriter.flush();
                 }
-                //regex does the same as previous, however this one checks for the interger division double slash
+                
+                // Regex does the same as previous, however this one checks for the integer division double slash
                 else if (equation.matches("\\A(\\d*)\\s(//)\\s(\\d*)\\Z")) {
                 	solution = intdiv (equation);
                     System.out.println("Sending the result...");
@@ -115,7 +117,7 @@ class ClientHandler extends Thread
                 }
                 else
                 {
-                	//Warns the user that they did not enter a valid string
+                	// Warns the user that they did not enter a valid string
                 	clientWriter.println("ERROR: You did not make a valid entry!");
                 }
                 
