@@ -94,7 +94,7 @@ public class calculatorClient
         {
             System.out.print("Enter the equation in the format: operand1 operator operand2\n");
             String input = compute.nextLine();
-            buf = new byte[65535];
+            buf = new byte[13579];
  
             // Convert the string input into a byte array
             buf = input.getBytes();
@@ -109,7 +109,7 @@ public class calculatorClient
             if (input.equals("exit"))
                 break;
  
-            buf = new byte[65535];
+            buf = new byte[13579];
             DatagramPacket DataReceive = new DatagramPacket(buf, buf.length);
             problem.receive(DataReceive);
  

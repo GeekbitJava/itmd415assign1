@@ -58,7 +58,10 @@ class ClientHandler extends Thread
                     active = false;
                     break;
                   
-                }else if (equation.equals("count")){
+                }
+                
+                else if (equation.equals("count"))
+                {
                 
                 	/*
                 	// Echoes back the sent information
@@ -81,58 +84,59 @@ class ClientHandler extends Thread
                 }
                 
                 else
-                {
-                	
-                	
-                	
-                	// Echoes back the sent information
+                {         	
+                   	// Echoes back the sent information
                 	//clientWriter.println(equation + "Received");
 
-                	
-
-                    // Use StringTokenizer to break the equation into operand and operation
+                	// Use StringTokenizer to break the equation into operand and operation
                     StringTokenizer st = new StringTokenizer(equation, " ");
          
-                    //parse string for operand1 operator and operand2
+                    // Parse string for operand1 operator and operand2
                     String num1 = st.nextToken();
                     String operation = st.nextToken();
                     String num2 = st.nextToken();
                     
-                    //set the operands to double  and int to allow for int division
+                    // Set the operands to double and int to allow for int division
                     int integ2 = Integer.parseInt(num2);
                     int integ1 = Integer.parseInt(num1);
                     double doub1 = Double.parseDouble(num1);
                     double doub2 = Double.parseDouble(num2);
 
-                    
                     // Perform the required operation given by user
-                    switch (operation) {
-                    case "+":
-                    	doubresult = doub1 + doub2;
-                    	solution = Double.toString(doubresult);                    	
-                        break;
-                    case "-":
-                    	doubresult = doub1 - doub2;
-                    	solution = Double.toString(doubresult);
-                        break;
-                    case "/":
-                    	doubresult = doub1 / doub2;
-                    	solution = Double.toString(doubresult);
-                        break;
-                    case "//":
-                    	intresult = integ1 / integ2;
-                    	solution = Integer.toString(intresult);
-                        break;
-                    case "%":
-                    	doubresult = doub1 % doub2;
-                    	solution = Double.toString(doubresult);
-                        break;
-                    case "*":
-                    	doubresult = doub1 * doub2;
-                    	solution = Double.toString(doubresult);
-                        break;
-                    default: System.out.println("ERROR");
-                    break;
+                    switch (operation) 
+                    {
+                    	case "+":
+                    		doubresult = doub1 + doub2;
+                    		solution = Double.toString(doubresult);                    	
+                    		break;
+                    	
+                    	case "-":
+                    		doubresult = doub1 - doub2;
+                    		solution = Double.toString(doubresult);
+                    		break;
+                    	
+                    	case "/":
+                    		doubresult = doub1 / doub2;
+                    		solution = Double.toString(doubresult);
+                    		break;
+                    	
+                    	case "//":
+                    		intresult = integ1 / integ2;
+                    		solution = Integer.toString(intresult);
+                    		break;
+                    	
+                    	case "%":
+                    		doubresult = doub1 % doub2;
+                    		solution = Double.toString(doubresult);
+                    		break;
+                    	
+                    	case "*":
+                    		doubresult = doub1 * doub2;
+                    		solution = Double.toString(doubresult);
+                    		break;
+                    	
+                    	default: System.out.println("ERROR!");
+                    	break;
                     }
          
                     System.out.println("Sending the result...");
