@@ -32,7 +32,6 @@ class ClientHandler extends Thread
  
     @Override
     public void run() 
-    //public void run(Thread[] clientThread)
     {
         String equation;
         String solution = "You did not enter the equation in the format: \n operand1 operator operand2";
@@ -62,46 +61,34 @@ class ClientHandler extends Thread
         //While loop continually checks for input and responds.
         while (active) 
         {
-        	try 
-            {                           
+            try 
+            {           
                 // Receive the equation from the client
                 equation = clientReader.readLine();
                  
                 // If statement determines if the user entered exit, count, or an equation
-                if (equation.equals("exit"))
-                	if (equation.equals("Exit"))
-                		if (equation.equals("EXIT"))
-                		{ 
-                			//Sets the loop to end and breaks to the end
-                			active = false;
-                			// break;             
-                		}
+                if (equation.equalsIgnoreCase("exit"))
+                { 
+                	//Sets the loop to end and breaks to the end
+                    active = false;
+                   // break;   
+                }
                 
-                else if (equation.equals("count"))
+                else if (equation.equalsIgnoreCase("count"))
                 {            	
-                	// Echoes back the sent information
-                	clientWriter.println(equation + " received...");
-                	
+
+                	//pulls the number of active threads
                 	int num = Thread.activeCount();
-                	clientWriter.println(num);
                 	
-                	Thread th[] = new Thread[num];
+                	//removes the count of the original server
+                	num = num - 1;
                 	
-                	// Returns the number of threads that are put into the array
-                	Thread.enumerate(th);
-                	                	
-                	// Prints the active threads when count is inputed 
-                	for (int count = 0; count < num; count++)
-                	{
-                		clientWriter.println(equation + ": " + th[count]);
-                	}          	
+                	//Prints out the message to the user and clears the buffer
+                	clientWriter.println("The current number of connected clients: " + num);                	       	
                 }
                 
                 else
                 {         	
-                   	// Echoes back the sent information
-                	//clientWriter.println(equation + "Received");
-
                 	// Use StringTokenizer to break the equation into operand and operation
                     StringTokenizer st = new StringTokenizer(equation, " ");
          

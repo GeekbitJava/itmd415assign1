@@ -57,8 +57,8 @@ public class calculatorClient
 	            System.out.println("You may enter \"count\" to show the number of connections,");
 	            System.out.println("or \"exit\" to disconnect.");
 	            /*JOptionPane.showMessageDialog(null, "Welcome to the 415/515 Calculator. \n You may enter \"count\" to show the number of connections, "
-	            		+ "or \"exit\" to disconnect.", "415/515 Calculator", JOptionPane.INFORMATION_MESSAGE);*/
-	           
+        		+ "or \"exit\" to disconnect.", "415/515 Calculator", JOptionPane.INFORMATION_MESSAGE);*/
+         
 	            // Do while loop keeps the prompt going until the user enters exit
 	            do
 	            {
@@ -75,7 +75,7 @@ public class calculatorClient
 	            		result = clientReader.readLine();
 	            		System.out.println(result);
 	            		//JOptionPane.showMessageDialog(null, "The answer is: " + result, "Result of Equation", JOptionPane.INFORMATION_MESSAGE);
-	            	}           
+	            	}        
 	            }
 	           
 	           // If exit is entered by user it will exit this loop
