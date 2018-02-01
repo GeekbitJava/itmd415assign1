@@ -51,7 +51,12 @@ public class calculatorServer
                 // Invoking the start() method
                 clientThread.start();
 
-                clientWriter.println(okMsg); 	    
+             //   if (clientReader.equals("Are you there?")) {
+                	
+            //    	clientWriter.println(okMsg); 
+            //    	clientWriter.flush();
+           //     }
+                	    
 
 	    	}
 	    	    
