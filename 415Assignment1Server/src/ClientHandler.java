@@ -29,19 +29,22 @@ class ClientHandler extends Thread
         this.clientWriter = clientWriter;
     }
  
-    //@Override
-    public void run(Thread[] clientThread) 
+    @Override
+    public void run() 
+    //public void run(Thread[] clientThread)
     {
         String equation;
         String solution = "You did not enter the equation in the format: \n operand1 operator operand2";
         int intresult;
         double doubresult;
         boolean active = true;
+        boolean discon = true;
         
         
         //While loop continually checks for input and responds.
         while (active) 
         {
+        	
             try 
             {
                 // Logs the new thread in the console
@@ -55,7 +58,7 @@ class ClientHandler extends Thread
                 { 
                 	//Sets the loop to end and breaks to the end
                     active = false;
-                    break;
+                   // break;
                   
                 }
                 
