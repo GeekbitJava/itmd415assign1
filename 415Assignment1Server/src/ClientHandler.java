@@ -71,7 +71,7 @@ class ClientHandler extends Thread
                 { 
                 	//Sets the loop to end and breaks to the end
                     active = false;
-                   // break;   
+                    break;   
                 }
                 
                 else if (equation.equalsIgnoreCase("count"))
