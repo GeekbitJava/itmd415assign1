@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
 // ClientHandler class
 class ClientHandler extends Thread 
 {
-	//declaration of class variables
+	// Declaration of class variables
     private final BufferedReader clientReader;
     private final PrintWriter clientWriter;
     private final Socket s;
@@ -51,14 +51,15 @@ class ClientHandler extends Thread
             }
         	
         }
-        catch (IOException e){
-        	
+        catch (IOException e)
+        {
+        	e.printStackTrace();
         }
         
         // Logs the new thread in the console
         System.out.println("Client " + this.s + " established");
         
-        //While loop continually checks for input and responds.
+        // While loop continually checks for input and responds.
         while (active) 
         {
             try 
@@ -69,22 +70,23 @@ class ClientHandler extends Thread
                 // If statement determines if the user entered exit, count, or an equation
                 if (equation.equalsIgnoreCase("exit"))
                 { 
-                	//Sets the loop to end and breaks to the end
+                	// Sets the loop to end and breaks to the end
                     active = false;
                     break;   
                 }     
+                
                 else if (equation.equalsIgnoreCase("count"))
                 {            	
-                	//pulls the number of active threads
+                	// Pulls the number of active threads
                 	threadCount = Thread.activeCount();
                 	
-                	//removes the count of the original server
+                	// Removes the count of the original server
                 	threadCount = threadCount - 1;
                 	
-                	//Prints out the message to the user and clears the buffer
+                	// Prints out the message to the user and clears the buffer
                 	clientWriter.println("The current number of connected clients: " + threadCount); 
                 	
-                	//resets the variable to 0
+                	// Resets the variable to 0
                 	threadCount = 0;
                 }
                 
@@ -97,6 +99,7 @@ class ClientHandler extends Thread
                     clientWriter.println(solution);
                     clientWriter.flush();
                 }
+                
                 // Regex checks for #.# Symbol #.#, ## Symbol #.#, and #.# Symbol ##
                 else if (equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
                 		equation.matches("\\A(\\d*)\\s([+,-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
@@ -109,12 +112,14 @@ class ClientHandler extends Thread
                 }
                 
                 // Regex does the same as previous, however this one checks for the integer division double slash
-                else if (equation.matches("\\A(\\d*)\\s(//)\\s(\\d*)\\Z")) {
+                else if (equation.matches("\\A(\\d*)\\s(//)\\s(\\d*)\\Z")) 
+                {
                 	solution = intdiv (equation);
                     System.out.println("Sending the result...");
                     clientWriter.println(solution);
                     clientWriter.flush();
                 }
+                
                 else
                 {
                 	// Warns the user that they did not enter a valid string
@@ -128,7 +133,7 @@ class ClientHandler extends Thread
                 e.printStackTrace();
             }
             
-        }//end of the while block
+        } //End of the while block
          
         try
         {        	
@@ -150,9 +155,9 @@ class ClientHandler extends Thread
         }
     }
     
-    public String intdiv (String eq) {
-    	
-    	//initialize local variables
+    public String intdiv (String eq) 
+    {
+    	// Initialize local variables
     	String answer = null;
         int intresult = 0;
     	
@@ -168,16 +173,17 @@ class ClientHandler extends Thread
         int integ2 = Integer.parseInt(num2);
         int integ1 = Integer.parseInt(num1);
 
-        //performs integer division on the given items
+        // Performs integer division on the given items
 		intresult = integ1 / integ2;
 		answer = Integer.toString(intresult);
     	
     	return answer;
     }
     
-    public String calcDouble (String eq) {
+    public String calcDouble (String eq) 
+    {
     	
-    	//initialize local variables
+    	// Initialize local variables
     	String answer = null;
         double doubresult;
     	
