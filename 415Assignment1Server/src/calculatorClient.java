@@ -8,20 +8,11 @@
  * Written by Deborah Barndt & Thomas Boller. */
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.Scanner;
-
-import javax.xml.ws.Response;
 
 public class calculatorClient 
 {
@@ -87,7 +78,8 @@ public class calculatorClient
 	    {
 	        System.out.println("Client side error: " + e.getMessage());
 	    }
-
+	    
+	    /*
 	    // Creates a scanner object
 	    Scanner compute = new Scanner(System.in);
 	    
@@ -123,5 +115,6 @@ public class calculatorClient
  
             System.out.println("Answer = " + new String(buf,0,buf.length));
         }
+*/
 	}
 }

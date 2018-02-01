@@ -9,12 +9,10 @@
  * Written by Deborah Barndt & Thomas Boller. */
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.StringTokenizer;
 
 
 // ClientHandler class
@@ -36,9 +34,14 @@ class ClientHandler extends Thread
     public void run() 
     {
         String equation;
-        String solution;
+        String solution = "You did not enter the equation in the format: \n operand1 operator operand2";
+        int intresult;
+        double doubresult;
+        boolean active = true;
         
-        while (true) 
+        
+        //While loop continually checks for input and responds.
+        while (active) 
         {
             try 
             {
@@ -51,19 +54,13 @@ class ClientHandler extends Thread
                 // If statement determines if the user entered exit, count, or an equation
                 if(equation.equals("exit"))
                 { 
-                	// Server says goodbye
-                	clientWriter.println("Goodbye");
-                	
-                	// Makes log of connection lost
-                    System.out.println("Client " + this.s + " sent exit signal.");
-                    this.s.close();
-                    System.out.println("Connection closed");
-                    
+                	//Sets the loop to end and breaks to the end
+                    active = false;
                     break;
-                }
+                  
+                }else if (equation.equals("count")){
                 
-                else
-                {
+                	/*
                 	// Echoes back the sent information
                 	clientWriter.println(equation + "Received");
                 	int num = Thread.activeCount();
@@ -79,6 +76,68 @@ class ClientHandler extends Thread
                 	{
                 		clientWriter.println(i + ": " + th[i]);
                 	}
+                	*/
+                	
+                }
+                
+                else
+                {
+                	
+                	
+                	
+                	// Echoes back the sent information
+                	//clientWriter.println(equation + "Received");
+
+                	
+
+                    // Use StringTokenizer to break the equation into operand and operation
+                    StringTokenizer st = new StringTokenizer(equation, " ");
+         
+                    //parse string for operand1 operator and operand2
+                    String num1 = st.nextToken();
+                    String operation = st.nextToken();
+                    String num2 = st.nextToken();
+                    
+                    //set the operands to double  and int to allow for int division
+                    int integ2 = Integer.parseInt(num2);
+                    int integ1 = Integer.parseInt(num1);
+                    double doub1 = Double.parseDouble(num1);
+                    double doub2 = Double.parseDouble(num2);
+
+                    
+                    // Perform the required operation given by user
+                    switch (operation) {
+                    case "+":
+                    	doubresult = doub1 + doub2;
+                    	solution = Double.toString(doubresult);                    	
+                        break;
+                    case "-":
+                    	doubresult = doub1 - doub2;
+                    	solution = Double.toString(doubresult);
+                        break;
+                    case "/":
+                    	doubresult = doub1 / doub2;
+                    	solution = Double.toString(doubresult);
+                        break;
+                    case "//":
+                    	intresult = integ1 / integ2;
+                    	solution = Integer.toString(intresult);
+                        break;
+                    case "%":
+                    	doubresult = doub1 % doub2;
+                    	solution = Double.toString(doubresult);
+                        break;
+                    case "*":
+                    	doubresult = doub1 * doub2;
+                    	solution = Double.toString(doubresult);
+                        break;
+                    default: System.out.println("ERROR");
+                    break;
+                    }
+         
+                    System.out.println("Sending the result...");
+                    clientWriter.println(solution);
+                    clientWriter.flush();
                 }
                 
             } 
@@ -87,14 +146,23 @@ class ClientHandler extends Thread
             {
                 e.printStackTrace();
             }
-        }
+            
+        }//end of the while block
          
         try
         {
+        	
+        	// Server says goodbye
+        	clientWriter.println("Goodbye");
+        	clientWriter.flush();
+            
+        	System.out.println("Client " + this.s + " Disconnected");
+        	
             // Closing resources
             this.clientReader.close();
             this.clientWriter.close();
-             
+            this.s.close();
+
         }
         
         catch(IOException e)

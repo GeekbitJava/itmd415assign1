@@ -16,6 +16,7 @@ public class calculatorServer
 {
     static String okMsg = "515OK - From CalculatorServer";
 
+
     public static void main(String[] args) throws IOException 
     {
     	// Just faster to put here, for changes
@@ -49,7 +50,10 @@ public class calculatorServer
  
                 // Invoking the start() method
                 clientThread.start();
+
+
                 clientWriter.println(okMsg); 	    
+
 	    	}
 	    	    
 	    	catch (IOException e) 
@@ -57,11 +61,11 @@ public class calculatorServer
 	    	    System.out.println("Server Error: " + e.getMessage());
 	    	        
 	    	}
-
-        }
+	    }
 	    
+	    /*
 	    // Create a socket to listen at port 1234
-        DatagramSocket listen = new DatagramSocket(1234);
+        DatagramSocket listen = new DatagramSocket();
         
         byte[] buf = null;
         
@@ -129,6 +133,7 @@ public class calculatorServer
             DataSend = new DatagramPacket(buf, buf.length, InetAddress.getLocalHost(), port);
             listen.send(DataSend);
         }
+        */
     }
 }
 
