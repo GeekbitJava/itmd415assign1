@@ -14,9 +14,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.StringTokenizer;
 
-import org.omg.CORBA.IntHolder;
-
-
 // ClientHandler class
 class ClientHandler extends Thread 
 {
@@ -63,10 +60,8 @@ class ClientHandler extends Thread
                 }
                 
                 else if (equation.equals("count"))
-                {
-                
-                	/*
-                	// Echoes back the sent information
+                {            	
+                	/*// Echoes back the sent information
                 	clientWriter.println(equation + "Received");
                 	int num = Thread.activeCount();
                 	clientWriter.println(num);
@@ -80,9 +75,7 @@ class ClientHandler extends Thread
                 	for (int i = 0; i < num; i++)
                 	{
                 		clientWriter.println(i + ": " + th[i]);
-                	}
-                	*/
-                	
+                	}  */            	
                 }
                 
                 else

@@ -51,7 +51,6 @@ public class calculatorServer
                 // Invoking the start() method
                 clientThread.start();
 
-
                 clientWriter.println(okMsg); 	    
 
 	    	}
