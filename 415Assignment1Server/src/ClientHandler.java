@@ -21,6 +21,7 @@ class ClientHandler extends Thread
     final PrintWriter clientWriter;
     final Socket s;
     static String okMsg = "515OK - From CalculatorServer";
+    private static String answermsg = "The answer is: ";
     
     // Constructor
     public ClientHandler(Socket s, BufferedReader clientReader, PrintWriter clientWriter) 
@@ -88,7 +89,7 @@ class ClientHandler extends Thread
                 {         	
                 	solution = calcDouble(equation);
                     System.out.println("Sending the result...");
-                    clientWriter.println(solution);
+                    clientWriter.println(answermsg + solution);
                     clientWriter.flush();
                 }
                 // Regex checks for #.# Symbol #.#, ## Symbol #.#, and #.# Symbol ##
@@ -98,14 +99,14 @@ class ClientHandler extends Thread
                 {         	
                 	solution = calcDouble(equation);
                     System.out.println("Sending the result...");
-                    clientWriter.println(solution);
+                    clientWriter.println(answermsg + solution);
                     clientWriter.flush();
                 }
                 // Regex does the same as previous, however this one checks for the integer division double slash
                 else if (equation.matches("\\A(\\d*)\\s(//)\\s(\\d*)\\Z")) {
                 	solution = intdiv (equation);
                     System.out.println("Sending the result...");
-                    clientWriter.println(solution);
+                    clientWriter.println(answermsg + solution);
                     clientWriter.flush();
                 }
                 else
