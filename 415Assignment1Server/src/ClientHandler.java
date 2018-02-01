@@ -64,23 +64,21 @@ class ClientHandler extends Thread
                 else if (equation.equals("count"))
                 {            	
                 	// Echoes back the sent information
-                	clientWriter.println(equation + "Received");
+                	clientWriter.println(equation + " received...");
                 	
-                	/*int num = Thread.activeCount();
+                	int num = Thread.activeCount();
                 	clientWriter.println(num);
                 	
-                	//Thread th[] = new Thread[num];
+                	Thread th[] = new Thread[num];
                 	
                 	// Returns the number of threads that are put into the array
-                	//Thread.enumerate(th);
-                	Thread.enumerate(clientThread);
-                	
+                	Thread.enumerate(th);
+                	                	
                 	// Prints the active threads when count is inputed 
-                	for (int i = 0; i < num; i++)
+                	for (int count = 0; count < num; count++)
                 	{
-                		//clientWriter.println(i + ": " + th[i]);
-                		clientWriter.println(i + ": " + clientThread[i]);
-                	}  */           	
+                		clientWriter.println(equation + ": " + th[count]);
+                	}          	
                 }
                 
                 else

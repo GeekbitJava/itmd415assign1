@@ -24,7 +24,7 @@ public class calculatorServer
 
 		// Creates the server socket, and logs that it was started
 	    ServerSocket serverSocket = new ServerSocket(portNumber);	
-	    System.out.println("The Server Socket is set \n");
+	    System.out.println("The Server Socket is set. \n");
 	    
 	    // Infinite loop for searching for connections
 	    while (true) 
