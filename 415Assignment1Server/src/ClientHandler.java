@@ -46,7 +46,8 @@ class ClientHandler extends Thread
             // Receive the equation from the client
             pingmsg = clientReader.readLine();
             
-            if (pingmsg.equals("Are you there?")) {
+            if (pingmsg.equals("Are you there?")) 
+            {
             	clientWriter.println(okMsg);
             }
         	
@@ -61,20 +62,19 @@ class ClientHandler extends Thread
         //While loop continually checks for input and responds.
         while (active) 
         {
-        	
-            try 
-            {
-                           
+        	try 
+            {                           
                 // Receive the equation from the client
                 equation = clientReader.readLine();
                  
                 // If statement determines if the user entered exit, count, or an equation
-                if(equation.equals("exit"))
+                if (equation.equals("exit"))
+                	if (equation.equals("Exit"))
+                		if (equation.equals("EXIT"))
                 { 
                 	//Sets the loop to end and breaks to the end
                     active = false;
-                   // break;
-                  
+                   // break;             
                 }
                 
                 else if (equation.equals("count"))
