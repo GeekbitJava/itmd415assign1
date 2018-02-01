@@ -17,10 +17,16 @@ import java.util.StringTokenizer;
 // ClientHandler class
 class ClientHandler extends Thread 
 {
+	//declaration of class variables
     private final BufferedReader clientReader;
-    final PrintWriter clientWriter;
-    final Socket s;
-    static String okMsg = "515OK - From CalculatorServer";
+    private final PrintWriter clientWriter;
+    private final Socket s;
+    private static String okMsg = "515OK - From CalculatorServer";
+    private String pingmsg = null;
+    private String equation;
+    private String solution = "You did not enter the equation in the format: \n operand1 operator operand2";
+    private boolean active = true;
+    private int threadCount = 0;
     
     // Constructor
     public ClientHandler(Socket s, BufferedReader clientReader, PrintWriter clientWriter) 
@@ -33,10 +39,6 @@ class ClientHandler extends Thread
     @Override
     public void run() 
     {
-        String equation;
-        String solution = "You did not enter the equation in the format: \n operand1 operator operand2";
-        boolean active = true;
-        String pingmsg = null;
         
         try
         {
@@ -74,13 +76,16 @@ class ClientHandler extends Thread
                 else if (equation.equalsIgnoreCase("count"))
                 {            	
                 	//pulls the number of active threads
-                	int num = Thread.activeCount();
+                	threadCount = Thread.activeCount();
                 	
                 	//removes the count of the original server
-                	num = num - 1;
+                	threadCount = threadCount - 1;
                 	
                 	//Prints out the message to the user and clears the buffer
-                	clientWriter.println("The current number of connected clients: " + num); 
+                	clientWriter.println("The current number of connected clients: " + threadCount); 
+                	
+                	//resets the variable to 0
+                	threadCount = 0;
                 }
                 //regex checks from start any number of digits followed by a whitespace, followed by one of the math symbols, followed
                 //by a whitespace followed by any number of digits not followed by anything else
