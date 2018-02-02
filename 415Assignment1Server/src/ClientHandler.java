@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.StringTokenizer;
 
+import javax.swing.JOptionPane;
+
 // ClientHandler class
 class ClientHandler extends Thread 
 {
@@ -90,6 +92,7 @@ class ClientHandler extends Thread
                 	solution = calcDouble(equation);
                     System.out.println("Sending the result...");
                     clientWriter.println(answermsg + solution);
+                    //JOptionPane.showMessageDialog(null, answermsg + solution, "Result of Equation", JOptionPane.INFORMATION_MESSAGE);
                     clientWriter.flush();
                 }
                 // Regex checks for #.# Symbol #.#, ## Symbol #.#, and #.# Symbol ##
@@ -100,6 +103,7 @@ class ClientHandler extends Thread
                 	solution = calcDouble(equation);
                     System.out.println("Sending the result...");
                     clientWriter.println(answermsg + solution);
+                    //JOptionPane.showMessageDialog(null, answermsg + solution, "Result of Equation", JOptionPane.INFORMATION_MESSAGE);
                     clientWriter.flush();
                 }
                 // Regex does the same as previous, however this one checks for the integer division double slash
@@ -107,12 +111,14 @@ class ClientHandler extends Thread
                 	solution = intdiv (equation);
                     System.out.println("Sending the result...");
                     clientWriter.println(answermsg + solution);
+                    //JOptionPane.showMessageDialog(null, answermsg + solution, "Result of Equation", JOptionPane.INFORMATION_MESSAGE);
                     clientWriter.flush();
                 }
                 else
                 {
                 	// Warns the user that they did not enter a valid string
                 	clientWriter.println("ERROR: You did not make a valid entry!");
+                	//JOptionPane.showMessageDialog(null, "ERROR: You did not make a valid entry!", "Error Occurred", JOptionPane.WARNING_MESSAGE);
                 }
                 
             } 
