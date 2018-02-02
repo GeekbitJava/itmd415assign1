@@ -81,11 +81,11 @@ class ClientHandler extends Thread
                 	num = num - 1;
                 	
                 	// Prints out the message to the user and clears the buffer
-                	clientWriter.println("The current number of connected clients: " + num); 
+                	clientWriter.println("The current number of connected clients is: " + num); 
                 }
                 // Regex checks from start any number of digits followed by a whitespace, followed by one of the math symbols, followed
                 // by a whitespace followed by any number of digits not followed by anything else
-                else if (equation.matches("\\A(\\d*)\\s([+,-,*,/,%])\\s(\\d*)\\Z"))
+                else if (equation.matches("\\A(\\d*)\\s([+,\\-,*,/,%])\\s(\\d*)\\Z"))
                 {         	
                 	solution = calcDouble(equation);
                     System.out.println("Sending the result...");
@@ -93,9 +93,9 @@ class ClientHandler extends Thread
                     clientWriter.flush();
                 }
                 // Regex checks for #.# Symbol #.#, ## Symbol #.#, and #.# Symbol ##
-                else if (equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
-                		equation.matches("\\A(\\d*)\\s([+,-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
-                		equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,-,*,/,%])\\s(\\d*)\\Z"))
+                else if (equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,\\-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
+                		equation.matches("\\A(\\d*)\\s([+,\\-,*,/,%])\\s(\\d*)(\\.)(\\d*)\\Z") || 
+                		equation.matches("\\A(\\d*)(\\.)(\\d*)\\s([+,\\-,*,/,%])\\s(\\d*)\\Z"))
                 {         	
                 	solution = calcDouble(equation);
                     System.out.println("Sending the result...");
